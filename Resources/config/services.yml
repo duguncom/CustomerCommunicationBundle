@@ -1,0 +1,4 @@
+services:
+    dugun_customer_communication.provider:
+        class: Dugun\Bundle\CustomerCommunicationBundle\Provider\ProviderFactory
+        arguments: ["%dugun_customer_communication%"]
