@@ -28,6 +28,12 @@ class ProviderFactory
     {
         $intercomConfig = $this->config['intercom'];
 
-        return new Client($intercomConfig['appId'], $intercomConfig['apiKey']);
+        if (array_key_exists('accessToken', $intercomConfig)) {
+            return new Client($intercomConfig['accessToken'], null);
+        } elseif (array_key_exists('appId', $intercomConfig) && array_key_exists('apiKey', $intercomConfig)) {
+            return new Client($intercomConfig['appId'], $intercomConfig['apiKey']);
+        }
+
+        throw new \InvalidArgumentException('Config');
     }
 }
